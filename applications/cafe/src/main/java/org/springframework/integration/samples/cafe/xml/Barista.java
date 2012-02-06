@@ -30,7 +30,7 @@ import org.springframework.integration.samples.cafe.OrderItem;
 
 public class Barista {
 	private static Logger logger = Logger.getLogger(Barista.class);
-	private long hotDrinkDelay = 5000;
+	private long hotDrinkDelay = 2000;
 
 	private long coldDrinkDelay = 1000;
 

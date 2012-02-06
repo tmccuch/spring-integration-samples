@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+    xmlns:cloud="http://schema.cloudfoundry.org/spring"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://schema.cloudfoundry.org/spring
+			http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd
+			http://www.springframework.org/schema/rabbit 
+			http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+    <!-- Request that queues, exchanges and bindings be automatically declared 
+        on the broker: -->
+    <rabbit:admin connection-factory="rabbitConnectionFactory" />
+
+    <!--  profiles must be the last elements in the file -->
+    
+    <!-- Obtain a connection to the RabbitMQ via cloudfoundry-runtime: -->
+    <beans profile="cloud">
+        <cloud:rabbit-connection-factory
+            id="rabbitConnectionFactory" />
+	    <rabbit:template id="amqpTemplate"
+	        connection-factory="rabbitConnectionFactory" 
+	        reply-timeout="60000" />
+    </beans>
+
+    <!-- connect to the local broker using the default user name and password -->
+    <beans profile="dev">
+	    <rabbit:connection-factory id="rabbitConnectionFactory" addresses="172.16.227.150,172.16.227.151" />
+	    <rabbit:template id="amqpTemplate" 
+	    	connection-factory="rabbitConnectionFactory" 
+	    	reply-timeout="60000"/>
+	    <rabbit:queue-arguments id="haArgs">
+    		<entry key="x-ha-policy" value="all" />
+		</rabbit:queue-arguments>
+    </beans>
+
+</beans>

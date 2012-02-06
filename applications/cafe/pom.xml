@@ -8,7 +8,7 @@
 	<name>Samples (Applications) - Cafe Sample</name>
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.integration.version>2.1.0.RELEASE</spring.integration.version>
+		<spring.integration.version>2.1.1.BUILD-SNAPSHOT</spring.integration.version>
         <spring.core.version>3.1.0.RELEASE</spring.core.version>
 		<log4j.version>1.2.16</log4j.version>
 		<junit.version>4.10</junit.version>
@@ -34,6 +34,17 @@
 			<artifactId>spring-integration-stream</artifactId>
 			<version>${spring.integration.version}</version>
 		</dependency>
+		        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>1.0.1.BUILD-SNAPSHOT</version>
+	    <exclusions>
+	        <exclusion>
+                    <groupId>com.rabbitmq</groupId>
+                    <artifactId>amqp-client</artifactId>
+                </exclusion>
+	    </exclusions>
+        </dependency>
 		<!-- Jackson JSON Mapper -->
 		<dependency>
 		    <groupId>org.codehaus.jackson</groupId>
@@ -74,10 +85,20 @@
 		</plugins>
 	</build>
     <repositories>
-        <repository>
-            <id>repo.springsource.org.milestone</id>
-            <name>Spring Framework Maven Milestone Repository</name>
-            <url>https://repo.springsource.org/milestone</url>
-        </repository>
+		<repository>
+			<id>repository.springframework.maven.release</id>
+			<name>Spring Framework Maven Release Repository</name>
+			<url>http://maven.springframework.org/release</url>
+		</repository>
+		<repository>
+			<id>repository.springframework.maven.milestone</id>
+			<name>Spring Framework Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+		</repository>
+		<repository>
+			<id>repository.springframework.maven.snapshot</id>
+			<name>Spring Framework Maven Snapshot Repository</name>
+			<url>http://maven.springframework.org/snapshot</url>
+		</repository>
     </repositories>
 </project>
