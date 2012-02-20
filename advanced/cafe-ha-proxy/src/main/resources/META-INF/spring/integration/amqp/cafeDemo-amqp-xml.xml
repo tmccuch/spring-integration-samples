@@ -20,7 +20,7 @@
 			http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
 
 	<!-- rabbit connection factory, rabbit template, and rabbit admin -->
-	<import resource="classpath:META-INF/spring/integration/ha-amqp/cafeDemo-amqp-config-xml.xml" />
+	<import resource="classpath:META-INF/spring/integration/amqp/cafeDemo-amqp-config-xml.xml" />
 
 	<!-- spring integration flow -->
 	<int:gateway id="cafe" service-interface="org.springframework.integration.samples.cafe.Cafe" />

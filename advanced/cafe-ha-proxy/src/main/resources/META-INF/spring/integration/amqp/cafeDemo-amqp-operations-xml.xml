@@ -16,7 +16,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- rabbit connection factory, rabbit template, and rabbit admin -->
-	<import resource="classpath:META-INF/spring/integration/ha-amqp/cafeDemo-amqp-config-xml.xml" />
+	<import resource="classpath:META-INF/spring/integration/amqp/cafeDemo-amqp-config-xml.xml" />
 
 	<!--  intercept messages on these channels while still allowing them to continue -->
     <int:wire-tap channel="logger" pattern="preOrders,coldDrinks,hotDrinks,preparedDrinks,deliveries"/>

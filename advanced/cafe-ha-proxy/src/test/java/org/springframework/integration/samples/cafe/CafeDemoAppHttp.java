@@ -34,7 +34,7 @@ import org.springframework.web.client.RestTemplate;
 public class CafeDemoAppHttp {
 	
 	private static Logger logger = Logger.getLogger(CafeDemoAppHttp.class);
-	private static String uri = "http://localhost:8080/cafe-http/placeOrder.htm";
+	private static String uri = "http://localhost:8080/cafe-ha-proxy/placeOrder.htm";
 	private static String jsonOrder = "{\"number\":1,\"items\":[{\"shots\":2,\"iced\":false,\"orderNumber\":1,\"drinkType\":\"LATTE\"},{\"shots\":3,\"iced\":true,\"orderNumber\":1,\"drinkType\":\"MOCHA\"}]}";
 	
 	/**
