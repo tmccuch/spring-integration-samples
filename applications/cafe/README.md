@@ -36,6 +36,27 @@ The prepared drinks are then sent to the Waiter where they are aggregated into a
    3. **cafeDemoAppAmqp**            - starts the Cafe Storefront (Places 100 orders on the orders queue)
    4. **cafeDemoAppOperationsAmqp**  - starts the Cafe Operations (OrderSplitter, DrinkRouter, PreparedDrinkAggregator)
    
+4. The example also provides an alternative configuration that uses RabbitMQ mirrored queues to provide highly available channels between the 
+   distributed components in the **CafeDemo** sample. To run this alternative configuration of the sample, be sure to:
+   1. pull the AMQP-206a branch from github.com/spring-tom/spring-amqp
+   2. pull the INT-2394 branch from github.com/spring-tom/spring-integration
+   3. pull the master branch from github.com/spring-tom/rabbitmq-java-client
+   4. build the rabbitmq java client by running shell> ant dist from within its base directory
+   5. add the rabbitmq-client.jar from the build/dist directory of the rabbitmq java client to the Java Build Path of the Cafe project
+   6. start up 2 RabbitMQ brokers, configured with the default guest|guest client credentials on the / vHost
+   7. cluster the 2 RabbitMQ brokers following the instructions here: (http://www.rabbitmq.com/clustering.html)
+   8. update the addresses element in the rabbitConnectionFactory bean definition within META-INF/spring/integration/ha-amqp/cafeDemo-amqp-config-xml.xml with the IP addresses of the two clustered RabbitMQ brokers
+   9. execute the following test classes in order:
+      1. **cafeDemoAppBaristaColdAmqp** - starts the Cold Drink Barista
+      2. **cafeDemoAppBaristaHotAmqp**  - starts the Hot Drink Barista
+      3. **cafeDemoAppAmqp**            - starts the Cafe Storefront (Places 100 orders on the orders queue)
+      4. **cafeDemoAppOperationsAmqp**  - starts the Cafe Operations (OrderSplitter, DrinkRouter, PreparedDrinkAggregator)
+  10. test the failover of your broker cluster by:
+      1. verify the mirroring of the queues by bringing up the RabbitMQ management console on both brokers and looking at the Queues tab
+      2. fail the first broker that is mastering all of the mirrored queues for the app while it is processing the 100 orders
+      3. verify the mastering of the mirrored queues immediately failed over to the second broker 
+      4. verify that all 100 deliveries ultimately get processed by following the count on the all-deliveries queue within the management console Queues tab
+      
 **Note**: All AMQP exchanges, queues, and bindings needed for this sample are defined within the different xml config files that support the above test classes.
    
 Upon running any of the alternatives, you should see the output similar to this:

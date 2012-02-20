@@ -57,7 +57,7 @@ public class CafeDemoAppAmqp {
 	public static void main(String[] args) {
 		AbstractApplicationContext context = 
 			CafeDemoAppUtilities.loadProfileContext(
-					"/META-INF/spring/integration/amqp/cafeDemo-amqp-xml.xml", 
+					"/META-INF/spring/integration/ha-amqp/cafeDemo-amqp-xml.xml", 
 					CafeDemoAppAmqp.class,CafeDemoAppUtilities.DEV);
 		order(context, 100);
 		context.close();
