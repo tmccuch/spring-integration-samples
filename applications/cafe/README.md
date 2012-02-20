@@ -38,8 +38,8 @@ The prepared drinks are then sent to the Waiter where they are aggregated into a
    
 4. The example also provides an alternative configuration that uses RabbitMQ mirrored queues to provide highly available channels between the 
    distributed components in the **CafeDemo** sample. To run this alternative configuration of the sample, be sure to:
-   1. pull the AMQP-206a branch from github.com/spring-tom/spring-amqp
-   2. pull the INT-2394 branch from github.com/spring-tom/spring-integration
+   1. pull the AMQP-206a branch from github.com/spring-tom/spring-amqp, cd to home directory and run shell> mvn install -P bootstrap
+   2. pull the INT-2394 branch from github.com/spring-tom/spring-integration, cd to spring-integration-amqp directory within the home directory and run shell> ../gradlew install
    3. pull the master branch from github.com/spring-tom/rabbitmq-java-client
    4. build the rabbitmq java client by running shell> ant dist from within its base directory
    5. add the rabbitmq-client.jar from the build/dist directory of the rabbitmq java client to the Java Build Path of the Cafe project
